@@ -10,19 +10,25 @@
             <h2>FILM</h2>
             <ul>
                 <li class="text-center" v-for="item, index in filmList" :key="index">
-                    <div>Titolo: {{item.title}}</div>
-                    <div>Titolo originale:{{item.original_title}}</div>
-                    <div>Lingua: {{item.original_language}}</div>
-                    <div>Voto: {{item.vote_average}}</div>
+                    <img :src="`https://image.tmdb.org/t/p/w342/${ item.poster_path }`" :alt="item.title">
+                    <div>
+                        <div>Titolo: {{item.title}}</div>
+                        <div>Titolo originale:{{item.original_title}}</div>
+                        <div>Lingua: {{item.original_language}}</div>
+                        <div>Voto: {{item.vote_average}}</div>
+                    </div>
                 </li>
             </ul>
             <h2>SERIE TV</h2>
             <ul>
                 <li class="text-center" v-for="item, index in tvList" :key="index">
-                    <div>Titolo: {{item.name}}</div>
-                    <div>Titolo originale: {{item.original_name}}</div>
-                    <div>Lingua: {{item.original_language}}</div>
-                    <div>Voto: {{item.vote_average}}</div>
+                    <img :src="`https://image.tmdb.org/t/p/w342/${ item.poster_path }`" :alt="item.name">
+                    <div>
+                        <div>Titolo: {{item.name}}</div>
+                        <div>Titolo originale: {{item.original_name}}</div>
+                        <div>Lingua: {{item.original_language}}</div>
+                        <div>Voto: {{item.vote_average}}</div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -45,7 +51,7 @@ export default {
             langList: [],
             userText: '',
             userLang: 'it',
-            userLangCapital: 'IT'
+            userLangCapital: 'IT',
         }
     },
     methods: {
@@ -75,7 +81,7 @@ export default {
             axios.get(this.langUrl).then((result) =>{
                 this.langList = result.data;
             });
-        }
+        },
     },
     watch: {
         text() {
@@ -85,7 +91,7 @@ export default {
     created() {
         this.getFilm();
         this.getLang();
-    }
+    },
 }
 </script>
 
@@ -103,12 +109,20 @@ ul {
         background-color: black;
         color: white;
         margin: 15px;
-        width: 250px;
     }
 }
 .d-flex {
     padding: 15px;
 }
-
+img {
+    width: 342px;
+    height: 513px;
+}
+h2 {
+    color: white;
+    font-weight: 700;
+    font-size: 35px;
+    text-align: center;
+}
 
 </style>
