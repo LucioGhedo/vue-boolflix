@@ -25,7 +25,10 @@
                             width="20"
                             :alt="`${item.original_language}`">
                         </div>
-                        <div>Voto: {{item.vote_average}}</div>
+                        <!-- <div>Voto: {{item.vote_average}}</div> -->
+                        <div class="text-center">
+                            <i v-for="n in 5" :key="n" class="fa-regular fa-star" :class="{'gold': n <= voteCiao(item.vote_average) }"></i>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -47,7 +50,9 @@
                             width="20"
                             :alt="`${item.original_language}`">
                         </div>
-                        <div>Voto: {{item.vote_average}}</div>
+                        <div class="text-center">
+                            <i v-for="n in 5" :key="n" class="fa-regular fa-star" :class="{'gold': n <= voteCiao(item.vote_average) }"></i>
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -101,7 +106,11 @@ export default {
             axios.get(this.langUrl).then((result) =>{
                 this.langList = result.data;
             });
-        },        
+        },
+        voteCiao(test) {
+            const count = test / 2;
+            return Math.round(count);
+        }      
     },
     watch: {
         text() {
@@ -152,6 +161,9 @@ li {
 .flag {
     height: 20px;
     width: 25px;
+}
+.gold {
+    color: yellow;
 }
 
 </style>
