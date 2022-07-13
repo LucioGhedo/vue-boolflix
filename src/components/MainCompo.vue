@@ -1,8 +1,8 @@
 <template>
     <div class="back">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <div class="container-fluid">
-            <div class="d-flex justify-content-center">
+        <div class="container_ms">
+            <div class="select-lang">
                 Select language: 
                 <select @change="selectLang" name="lang" id="lang">
                     <option v-for="item, index in langList" :key="index" :value="item.iso_639_1">{{item.english_name}}</option>
@@ -138,6 +138,7 @@ export default {
 @import '../assets/common.scss';
 .back {
     background-color: grey;
+    height: 100%;
 }
 ul {
     list-style-type: none;
@@ -147,27 +148,24 @@ ul {
     // flex-wrap: wrap;
     li {
         background-color: black;
+        width: 200px;
         color: white;
         margin: 15px;
+        max-height: 33vh;
     }
 }
 .d-flex {
     padding: 15px;
 }
 img {
-    width: 342px;
-    max-width: 342px;
-    height: 513px;
+    width: 200px;
+    height: 33vh;
 }
 h2 {
     color: white;
     font-weight: 700;
     font-size: 35px;
     text-align: center;
-}
-li {
-    width: 342px;
-    height: 513px;
 }
 .flag {
     height: 20px;
@@ -178,7 +176,7 @@ li {
     color: yellow;
 }
 .stars {
-    font-size: 20px;
+    font-size: 10px;
     margin: 15px;
 }
 .cover {
@@ -186,8 +184,6 @@ li {
 }
 .hidden {
     display: none;
-    max-height: 513px;
-    width: 342px;
 }
 li:hover {
     .cover {
@@ -195,20 +191,32 @@ li:hover {
     }
     .hidden {
         display: block;
+        width: 200px;
     }
 }
+ul:last-of-type {
+    margin-bottom: 30px;
+}
 .title {
-    font-size: 20px;
+    font-size: 12px;
     margin: 15px;
 }
 .lang {
-    font-size: 20px;
+    font-size: 10px;
     margin: 15px;
 }
 .overview {
     margin: 15px; 
     overflow-y: auto;
-    max-height: 288px;
+    max-height: 70px;
+}
+.select-lang {
+    display: flex;
+    justify-content: center;
+}
+.container_ms {
+    width: 90%;
+    margin: 0 auto;
 }
 
 </style>
