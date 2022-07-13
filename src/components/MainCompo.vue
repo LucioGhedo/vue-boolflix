@@ -1,5 +1,6 @@
 <template>
     <div class="back">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <div class="container">
             <div class="d-flex justify-content-center">
                 Select language: 
@@ -14,7 +15,16 @@
                     <div>
                         <div>Titolo: {{item.title}}</div>
                         <div>Titolo originale:{{item.original_title}}</div>
-                        <div>Lingua: {{item.original_language}}</div>
+                        <div v-if="item.original_language == 'en'">Lingua: {{item.original_language}}</div>
+                        <div v-else>
+                            <img
+                            class="flag"
+                            :src="`https://flagcdn.com/16x12/${item.original_language}.png`"
+                            :srcset="`https://flagcdn.com/32x24/${item.original_language}.png 2x,
+                                https://flagcdn.com/48x36/${item.original_language}.png 3x`"
+                            width="20"
+                            :alt="`${item.original_language}`">
+                        </div>
                         <div>Voto: {{item.vote_average}}</div>
                     </div>
                 </li>
@@ -26,7 +36,17 @@
                     <div>
                         <div>Titolo: {{item.name}}</div>
                         <div>Titolo originale: {{item.original_name}}</div>
-                        <div>Lingua: {{item.original_language}}</div>
+                        <!-- <div>Lingua: {{item.original_language}}</div> -->
+                        <div v-if="item.original_language == 'en'">Lingua: {{item.original_language}}</div>
+                        <div v-else>
+                            <img
+                            class="flag"
+                            :src="`https://flagcdn.com/16x12/${item.original_language}.png`"
+                            :srcset="`https://flagcdn.com/32x24/${item.original_language}.png 2x,
+                                https://flagcdn.com/48x36/${item.original_language}.png 3x`"
+                            width="20"
+                            :alt="`${item.original_language}`">
+                        </div>
                         <div>Voto: {{item.vote_average}}</div>
                     </div>
                 </li>
@@ -81,7 +101,7 @@ export default {
             axios.get(this.langUrl).then((result) =>{
                 this.langList = result.data;
             });
-        },
+        },        
     },
     watch: {
         text() {
@@ -116,6 +136,7 @@ ul {
 }
 img {
     width: 342px;
+    max-width: 342px;
     height: 513px;
 }
 h2 {
@@ -123,6 +144,14 @@ h2 {
     font-weight: 700;
     font-size: 35px;
     text-align: center;
+}
+li {
+    width: 342px;
+    height: 650px;
+}
+.flag {
+    height: 20px;
+    width: 25px;
 }
 
 </style>
