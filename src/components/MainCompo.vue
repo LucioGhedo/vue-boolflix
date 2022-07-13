@@ -1,7 +1,7 @@
 <template>
     <div class="back">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <div class="container">
+        <div class="container-fluid">
             <div class="d-flex justify-content-center">
                 Select language: 
                 <select @change="selectLang" name="lang" id="lang">
@@ -11,27 +11,29 @@
             <h2>FILM</h2>
             <ul>
                 <li v-for="item, index in filmList" :key="index">
-                    <div class="cover">
-                        <img :src="`https://image.tmdb.org/t/p/w342/${ item.poster_path }`" :alt="item.title">
-                    </div>
-                    <div class="hidden">
-                        <div class="title">Titolo: {{item.title}}</div>
-                        <div class="title">Titolo originale:{{item.original_title}}</div>
-                        <div class="lang" v-if="item.original_language == 'en'">Lingua: {{item.original_language}}</div>
-                        <div v-else>
-                            <img
-                            class="flag"
-                            :src="`https://flagcdn.com/16x12/${item.original_language}.png`"
-                            :srcset="`https://flagcdn.com/32x24/${item.original_language}.png 2x,
-                                https://flagcdn.com/48x36/${item.original_language}.png 3x`"
-                            width="20"
-                            :alt="`${item.original_language}`">
+                    <div class="test">
+                        <div class="cover">
+                            <img :src="`https://image.tmdb.org/t/p/w342/${ item.poster_path }`" :alt="item.title">
                         </div>
-                        <div class="stars">
-                            <i v-for="n in 5" :key="n" class="fa-regular fa-star" :class="{'gold': n <= voteCalc(item.vote_average) }"></i>
+                        <div class="hidden">
+                            <div class="title">Titolo: {{item.title}}</div>
+                            <div class="title">Titolo originale:{{item.original_title}}</div>
+                            <div class="lang" v-if="item.original_language == 'en'">Lingua: {{item.original_language}}</div>
+                            <div v-else>
+                                <img
+                                class="flag"
+                                :src="`https://flagcdn.com/16x12/${item.original_language}.png`"
+                                :srcset="`https://flagcdn.com/32x24/${item.original_language}.png 2x,
+                                    https://flagcdn.com/48x36/${item.original_language}.png 3x`"
+                                width="20"
+                                :alt="`${item.original_language}`">
+                            </div>
+                            <div class="stars">
+                                <i v-for="n in 5" :key="n" class="fa-regular fa-star" :class="{'gold': n <= voteCalc(item.vote_average) }"></i>
+                            </div>
+                            <div class="overview">{{item.overview}}</div>
+                            <!-- <div>Voto: {{item.vote_average}}</div> -->
                         </div>
-                        <div class="overview">{{item.overview}}</div>
-                        <!-- <div>Voto: {{item.vote_average}}</div> -->
                     </div>
                 </li>
             </ul>
@@ -116,7 +118,9 @@ export default {
         voteCalc(mark) {
             const count = mark / 2;
             return Math.round(count);
-        }      
+        },
+        // TEST
+         
     },
     watch: {
         text() {
@@ -138,8 +142,9 @@ export default {
 ul {
     list-style-type: none;
     display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+    overflow-x: auto;
+    // justify-content: space-evenly;
+    // flex-wrap: wrap;
     li {
         background-color: black;
         color: white;
@@ -181,8 +186,8 @@ li {
 }
 .hidden {
     display: none;
-    max-height: 512px;
-    overflow-y: auto;
+    max-height: 513px;
+    width: 342px;
 }
 li:hover {
     .cover {
@@ -196,9 +201,6 @@ li:hover {
     font-size: 20px;
     margin: 15px;
 }
-.title:first-of-type {
-    margin-top: 40px;
-}
 .lang {
     font-size: 20px;
     margin: 15px;
@@ -206,7 +208,7 @@ li:hover {
 .overview {
     margin: 15px; 
     overflow-y: auto;
-    max-height: 400px;
+    max-height: 288px;
 }
 
 </style>

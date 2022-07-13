@@ -2,7 +2,7 @@
     <div class="back">
         <div class="container">
             <div class="d-flex justify-content-between">
-                <div>BOOLFLIX</div>
+                <div class="title">BOOLFLIX</div>
                 <div class="ms_input">
                     <input v-model="userSearch" type="text" name="search" id="search">
                     <button @click="$emit('search', userSearch)" class="btn-primary">Search</button>
@@ -34,6 +34,9 @@ export default {
 div {
     color: white;
     font-size: 30px;
+}
+.title {
+    color: red;
 }
 .ms_input {
     display: flex;
