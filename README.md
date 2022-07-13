@@ -1,3 +1,7 @@
+# ESERCIZIO COMPLETATO
+```
+Mancano i bonus e si potrebbero sistemare ancora le misure del wrapper e delle card, oltre a creare un componente per le singleCard al posto di fare tutto nel mainComponent
+```
 # vue-boolflix
 
 ## Project setup
