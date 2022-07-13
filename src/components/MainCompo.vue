@@ -10,12 +10,14 @@
             </div>
             <h2>FILM</h2>
             <ul>
-                <li class="text-center" v-for="item, index in filmList" :key="index">
-                    <img :src="`https://image.tmdb.org/t/p/w342/${ item.poster_path }`" :alt="item.title">
-                    <div>
-                        <div>Titolo: {{item.title}}</div>
-                        <div>Titolo originale:{{item.original_title}}</div>
-                        <div v-if="item.original_language == 'en'">Lingua: {{item.original_language}}</div>
+                <li v-for="item, index in filmList" :key="index">
+                    <div class="cover">
+                        <img :src="`https://image.tmdb.org/t/p/w342/${ item.poster_path }`" :alt="item.title">
+                    </div>
+                    <div class="hidden">
+                        <div class="title">Titolo: {{item.title}}</div>
+                        <div class="title">Titolo originale:{{item.original_title}}</div>
+                        <div class="lang" v-if="item.original_language == 'en'">Lingua: {{item.original_language}}</div>
                         <div v-else>
                             <img
                             class="flag"
@@ -25,20 +27,23 @@
                             width="20"
                             :alt="`${item.original_language}`">
                         </div>
-                        <!-- <div>Voto: {{item.vote_average}}</div> -->
-                        <div class="text-center">
-                            <i v-for="n in 5" :key="n" class="fa-regular fa-star" :class="{'gold': n <= voteCiao(item.vote_average) }"></i>
+                        <div class="stars">
+                            <i v-for="n in 5" :key="n" class="fa-regular fa-star" :class="{'gold': n <= voteCalc(item.vote_average) }"></i>
                         </div>
+                        <div class="overview">{{item.overview}}</div>
+                        <!-- <div>Voto: {{item.vote_average}}</div> -->
                     </div>
                 </li>
             </ul>
             <h2>SERIE TV</h2>
             <ul>
                 <li class="text-center" v-for="item, index in tvList" :key="index">
-                    <img :src="`https://image.tmdb.org/t/p/w342/${ item.poster_path }`" :alt="item.name">
-                    <div>
-                        <div>Titolo: {{item.name}}</div>
-                        <div>Titolo originale: {{item.original_name}}</div>
+                    <div class="cover">
+                        <img :src="`https://image.tmdb.org/t/p/w342/${ item.poster_path }`" :alt="item.name">
+                    </div>
+                    <div class="hidden">
+                        <div class="title">Titolo: {{item.name}}</div>
+                        <div class="title">Titolo originale: {{item.original_name}}</div>
                         <!-- <div>Lingua: {{item.original_language}}</div> -->
                         <div v-if="item.original_language == 'en'">Lingua: {{item.original_language}}</div>
                         <div v-else>
@@ -50,9 +55,10 @@
                             width="20"
                             :alt="`${item.original_language}`">
                         </div>
-                        <div class="text-center">
-                            <i v-for="n in 5" :key="n" class="fa-regular fa-star" :class="{'gold': n <= voteCiao(item.vote_average) }"></i>
+                        <div class="stars">
+                            <i v-for="n in 5" :key="n" class="fa-regular fa-star" :class="{'gold': n <= voteCalc(item.vote_average) }"></i>
                         </div>
+                        <div class="overview">{{item.overview}}</div>
                     </div>
                 </li>
             </ul>
@@ -107,8 +113,8 @@ export default {
                 this.langList = result.data;
             });
         },
-        voteCiao(test) {
-            const count = test / 2;
+        voteCalc(mark) {
+            const count = mark / 2;
             return Math.round(count);
         }      
     },
@@ -156,14 +162,51 @@ h2 {
 }
 li {
     width: 342px;
-    height: 650px;
+    height: 513px;
 }
 .flag {
     height: 20px;
     width: 25px;
+    margin: 15px;
 }
 .gold {
     color: yellow;
+}
+.stars {
+    font-size: 20px;
+    margin: 15px;
+}
+.cover {
+    display: block;
+}
+.hidden {
+    display: none;
+    max-height: 512px;
+    overflow-y: auto;
+}
+li:hover {
+    .cover {
+        display: none;
+    }
+    .hidden {
+        display: block;
+    }
+}
+.title {
+    font-size: 20px;
+    margin: 15px;
+}
+.title:first-of-type {
+    margin-top: 40px;
+}
+.lang {
+    font-size: 20px;
+    margin: 15px;
+}
+.overview {
+    margin: 15px; 
+    overflow-y: auto;
+    max-height: 400px;
 }
 
 </style>
