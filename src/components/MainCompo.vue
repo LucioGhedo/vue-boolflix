@@ -13,7 +13,10 @@
                 <li v-for="item, index in filmList" :key="index">
                     <div class="test">
                         <div class="cover">
-                            <img :src="`https://image.tmdb.org/t/p/w342/${ item.poster_path }`" :alt="item.title">
+                            <div class="not-found" v-if="item.poster_path == null">
+                                POSTER NOT FOUND
+                            </div>
+                            <img v-else :src="`https://image.tmdb.org/t/p/w342${ item.poster_path }`" :alt="item.name">
                         </div>
                         <div class="hidden">
                             <div class="title">Titolo: {{item.title}}</div>
@@ -40,7 +43,10 @@
             <ul>
                 <li class="text-center" v-for="item, index in tvList" :key="index">
                     <div class="cover">
-                        <img :src="`https://image.tmdb.org/t/p/w342/${ item.poster_path }`" :alt="item.name">
+                        <div class="not-found" v-if="item.poster_path == null">
+                            POSTER NOT FOUND
+                        </div>
+                        <img v-else :src="`https://image.tmdb.org/t/p/w342${ item.poster_path }`" :alt="item.name">
                     </div>
                     <div class="hidden">
                         <div class="title">Titolo: {{item.name}}</div>
@@ -97,8 +103,8 @@ export default {
         },
         searchFilm() {
             this.userText = this.text;
-            this.url = `https://api.themoviedb.org/3/search/movie?api_key=f2faa276f128d7e15803d0612da76a93&language=${this.userLang}-${this.userLangCapital}&query=${this.text}&page=1&include_adult=false`;
-            this.urlTv = `https://api.themoviedb.org/3/search/tv?page=1&query=${this.userText}&include_adult=false&api_key=f2faa276f128d7e15803d0612da76a93&language=${this.userLang}-${this.userLangCapital}`;
+            this.url = `https://api.themoviedb.org/3/search/movie?api_key=f2faa276f128d7e15803d0612da76a93&language=${this.userLang}-${this.userLangCapital}&query=${this.text}&page=1&include_adult=true`;
+            this.urlTv = `https://api.themoviedb.org/3/search/tv?page=1&query=${this.userText}&include_adult=true&api_key=f2faa276f128d7e15803d0612da76a93&language=${this.userLang}-${this.userLangCapital}`;
             this.filmList = [];
             this.tvList = [];
             this.getFilm();
@@ -227,6 +233,10 @@ ul:last-of-type {
 .container_ms {
     width: 90%;
     margin: 0 auto;
+}
+.not-found {
+    color: red;
+    font-size: 19px;
 }
 
 </style>
