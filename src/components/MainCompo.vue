@@ -157,8 +157,6 @@ ul {
     list-style-type: none;
     display: flex;
     overflow-x: auto;
-    // justify-content: space-evenly;
-    // flex-wrap: wrap;
     li {
         background-color: black;
         width: 200px;
