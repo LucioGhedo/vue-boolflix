@@ -3,7 +3,7 @@
         <div class="container">
             <div class="d-flex justify-content-between align-center">
                 <div class="title">
-                    <a href="https://fontmeme.com/netflix-font/"><img src="https://fontmeme.com/permalink/220714/6cc427429c6979ae121f41645874c919.png" alt="netflix-font" border="0"></a>
+                    <a href="#"><img src="https://fontmeme.com/permalink/220714/6cc427429c6979ae121f41645874c919.png" alt="netflix-font"></a>
                     <div class="links">
                         <span class="active">Home</span>
                         <span>Serie tv</span>
@@ -13,8 +13,18 @@
                     </div>
                 </div>
                 <div class="ms_input">
-                    <input v-model="userSearch" type="text" name="search" id="search">
-                    <button @click="$emit('search', userSearch)" class="btn-primary">Search</button>
+                    <input 
+                    @keyup.enter="$emit('search', userSearch)" 
+                    v-model="userSearch" 
+                    type="text" 
+                    name="search" 
+                    id="search">
+
+                    <button 
+                    @click="$emit('search', userSearch)" 
+                    class="btn-primary">
+                        Search
+                    </button>
                 </div>
             </div>
         </div>
