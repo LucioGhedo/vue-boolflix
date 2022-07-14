@@ -2,7 +2,16 @@
     <div class="back">
         <div class="container">
             <div class="d-flex justify-content-between">
-                <div class="title">BOOLFLIX</div>
+                <div class="title">
+                    BOOLFLIX
+                    <div class="links">
+                        <span class="active">Home</span>
+                        <span>Serie tv</span>
+                        <span>Film</span>
+                        <span>Original</span>
+                        <span>La mia lista</span>
+                    </div>
+                </div>
                 <div class="ms_input">
                     <input v-model="userSearch" type="text" name="search" id="search">
                     <button @click="$emit('search', userSearch)" class="btn-primary">Search</button>
@@ -37,6 +46,7 @@ div {
 }
 .title {
     color: red;
+    display: flex;
 }
 .ms_input {
     display: flex;
@@ -46,6 +56,19 @@ div {
     }
     button {
         font-size: 15px;
+    }
+}
+.links {
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    padding-top: 5px;
+    span {
+        padding: 0 10px;
+        color: grey;
+        &.active {
+            color: white;
+        }
     }
 }
 </style>
