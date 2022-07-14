@@ -222,6 +222,7 @@ ul:last-of-type {
 .select-lang {
     display: flex;
     justify-content: center;
+    padding-top: 15px;
 }
 .container_ms {
     width: 90%;
