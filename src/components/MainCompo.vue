@@ -18,13 +18,12 @@
                         <div class="hidden">
                             <div class="title">Titolo: {{item.title}}</div>
                             <div class="title">Titolo originale:{{item.original_title}}</div>
-                            <div class="lang" v-if="item.original_language == 'en'">Lingua: {{item.original_language}}</div>
-                            <div v-else>
+                            <div>
                                 <img
                                 class="flag"
-                                :src="`https://flagcdn.com/16x12/${item.original_language}.png`"
-                                :srcset="`https://flagcdn.com/32x24/${item.original_language}.png 2x,
-                                    https://flagcdn.com/48x36/${item.original_language}.png 3x`"
+                                :src="`https://flagcdn.com/16x12/${fixFlag(item.original_language)}.png`"
+                                :srcset="`https://flagcdn.com/32x24/${fixFlag(item.original_language)}.png 2x,
+                                    https://flagcdn.com/48x36/${fixFlag(item.original_language)}.png 3x`"
                                 width="20"
                                 :alt="`${item.original_language}`">
                             </div>
@@ -47,13 +46,13 @@
                         <div class="title">Titolo: {{item.name}}</div>
                         <div class="title">Titolo originale: {{item.original_name}}</div>
                         <!-- <div>Lingua: {{item.original_language}}</div> -->
-                        <div v-if="item.original_language == 'en'">Lingua: {{item.original_language}}</div>
-                        <div v-else>
+                        <!-- <div v-if="item.original_language == 'en'">Lingua: {{item.original_language}}</div> -->
+                        <div>
                             <img
                             class="flag"
-                            :src="`https://flagcdn.com/16x12/${item.original_language}.png`"
-                            :srcset="`https://flagcdn.com/32x24/${item.original_language}.png 2x,
-                                https://flagcdn.com/48x36/${item.original_language}.png 3x`"
+                            :src="`https://flagcdn.com/16x12/${fixFlag(item.original_language)}.png`"
+                            :srcset="`https://flagcdn.com/32x24/${fixFlag(item.original_language)}.png 2x,
+                                https://flagcdn.com/48x36/${fixFlag(item.original_language)}.png 3x`"
                             width="20"
                             :alt="`${item.original_language}`">
                         </div>
@@ -119,7 +118,21 @@ export default {
             const count = mark / 2;
             return Math.round(count);
         },
-        // TEST
+        fixFlag(flag) {
+        if(flag == 'en'){
+            return "gb";
+        } else if(flag == 'ja'){
+            return "jp";
+        } else if(flag == 'hi'){
+            return "in";
+        } else if(flag == 'cs'){
+            return "cz";
+        } else if(flag == 'ko'){
+            return "kr";
+        } else if(flag == 'sv'){
+            return "ch";
+        } return flag
+    }
          
     },
     watch: {
@@ -154,9 +167,6 @@ ul {
         max-height: 33vh;
     }
 }
-.d-flex {
-    padding: 15px;
-}
 img {
     width: 200px;
     height: 33vh;
@@ -181,6 +191,7 @@ h2 {
 }
 .cover {
     display: block;
+    width: 200px;
 }
 .hidden {
     display: none;
